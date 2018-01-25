@@ -44,6 +44,7 @@ This is the article for your podcast episode. It is recommended to use a page br
 ## Todo
 
 * iTunes metadata
+* Extend `PodcastFilter` with a location feature, e.G. `PodcastFilter: /my-podcast/`
 * Dedicated podcast page template
 
 
