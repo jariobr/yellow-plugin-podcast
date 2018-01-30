@@ -39,7 +39,7 @@ class YellowPodcast
 				$output = "<?xml version=\"1.0\" encoding=\"utf-8\"\077>\r\n";
 				$output .= "<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\r\n";
 				$output .= "<channel>\r\n";
-				$output .= "<title>".$this->yellow->page->getHtml("sitename")." - Podcast Feed</title>\r\n";
+				$output .= "<title>".$this->yellow->page->getHtml("sitename")." - ".$this->yellow->text->getHtml("PodcastFeed")."</title>\r\n";
 				$output .= "<link>".$this->yellow->page->scheme."://".$this->yellow->page->address.$this->yellow->page->base."/"."</link>\r\n";
 				$output .= "<description>".$this->yellow->page->getHtml("tagline")."</description>\r\n";
 				$output .= "<language>".$this->yellow->page->getHtml("language")."</language>\r\n";

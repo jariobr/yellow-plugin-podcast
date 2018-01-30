@@ -1,0 +1,4 @@
+Language: en
+
+PodcastFeed: Podcast Feed
+PodcastArchive: All episodes
