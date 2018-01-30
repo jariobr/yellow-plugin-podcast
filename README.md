@@ -23,8 +23,19 @@ The following settings can be configured in file `system/config/config.ini`:
 `PodcastFilter` = podcast template filter  
 `PodcastPaginationLimit` = number of entries to show per page  
 `PodcastMimeType` = mimetype of included files, default is audio/mpeg (mp3)  
+`PodcastImageUrl` = URL to your podcast image.  
+`PodcastImageWidth` and `PodcastImageHeight` = image dimensions in pixel.  
+`PodcastKeywords` = Some global Keywords (or tags) for your podcast.  
+`PodcastExplicit` = Does your podcast contain explicit content? Default is no.  
+`PodcastItunesBlock` = Block iTunes directory from listing your podcast, default is no.  
+`PodcastCategory` and `PodcastSubcategory` = iTunes podcast category names. Currently only one category or one category and one subcategory is supported.  
 
-To enable media file support in the feed, you additionally have to define the file in the page metadata, see example below. 
+Additionally, the following page metadata can be specified: 
+
+`Mediafile` = URL to the podcast media file.  
+`Duration` = the duration of the episode in the format HH:MM:SS (required for iTunes).  
+
+*Note*: Only a media file is mandatory for the podcast. All other settings are optional, but are required for propper iTunes directory listing. 
 
 ## Example
 
@@ -35,18 +46,18 @@ Here is a blog page with included media content.
 Title: A new podcast episode
 Published: 2018-01-01 12:45:00
 Author: Steffen
+Tag: cool, stuff
 Template: blog
 Mediafile: http://cdn.yourdomain.tld/podcast/files/episode1.mp3
+Duration: 00:10:00
 ---
-This is the article for your podcast episode. It is recommended to use a page break to provide your listeners with a summary for their podcatchers. Furthermore you should link the media file [somewhere in this text](http://cdn.yourdomain.tld/podcast/files/episode1.mp3) for direct download. 
+This is the article for your podcast episode.[--more--] It is recommended to use a page break to provide your listeners with a summary for their podcatchers. Furthermore you should link the media file [somewhere in this text](http://cdn.yourdomain.tld/podcast/files/episode1.mp3) for direct download. 
 ```
 
 ## Todo
 
-* iTunes metadata
-* Extend `PodcastFilter` with a location feature, e.G. `PodcastFilter: /my-podcast/`
-* Dedicated podcast page template
-
+* Dedicated podcast page template with audio player
+* Extend `PodcastFilter` with a location feature, e.G. `PodcastFilterLocation: /my-podcast/`
 
 ## Developer
 
