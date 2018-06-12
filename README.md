@@ -7,6 +7,7 @@ Simple podcast feed for media files. Based on the [original Yellow feed plugin](
 1. [Download and install Datenstrom Yellow](https://github.com/datenstrom/yellow/).
 2. [Download plugin](https://github.com/schulle4u/yellow-plugin-podcast/archive/master.zip). If you are using Safari, right click and select 'Download file as'.
 3. Copy `podcast.zip` into your `system/plugins` folder.
+4. Optional: download and install the [Audio plugin](https://github.com/schulle4u/yellow-plugin-audio/). 
 
 To uninstall delete the [plugin files](update.ini).
 

@@ -90,7 +90,12 @@ class YellowPodcast
 					$output .= "<dc:creator>".$page->getHtml("author")."</dc:creator>\r\n";
 					$output .= "<description>".$page->getHtml("description")."</description>\r\n";
 					$output .= "<content:encoded><![CDATA[".$content."]]></content:encoded>\r\n";
-					if($page->isExisting("mediafile")) $output .= "<enclosure url=\"".$page->getHtml("mediafile")."\" length=\"0\" type=\"".$this->yellow->config->get("podcastMimeType")."\" />\r\n";
+					if($this->yellow->config->isExisting("audioBase")) {
+						$base = $this->yellow->config->get("audioBase");
+						if($page->isExisting("mediafile")) $output .= "<enclosure url=\"".$base.$page->getHtml("mediafile")."\" length=\"0\" type=\"".$this->yellow->config->get("podcastMimeType")."\" />\r\n";
+					} else {
+						if($page->isExisting("mediafile")) $output .= "<enclosure url=\"".$page->getHtml("mediafile")."\" length=\"0\" type=\"".$this->yellow->config->get("podcastMimeType")."\" />\r\n";
+					}
 					if($page->isExisting("duration")) $output .= "<itunes:duration>".$page->getHtml("duration")."</itunes:duration>\r\n";
 					$output .= "<itunes:subtitle>".$page->getHtml("description")."</itunes:subtitle>\r\n";
 					$output .= "<itunes:summary><![CDATA[".$content."]]></itunes:summary>\r\n";
