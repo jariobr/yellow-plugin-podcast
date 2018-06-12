@@ -12,7 +12,7 @@ To uninstall delete the [plugin files](update.ini).
 
 ## How to use a podcast?
 
-The podcast feed is available on your website as `http://website/podcast/` and `http://website/podcast/page:podcast.xml`. It's a feed for the entire website, only visible pages are included. To make a blog podcast feed open file `system/config/config.ini` and change `PodcastFilter: blog`. You can add a link to the podcast somewhere on your website. 
+The podcast feed is available on your website as `http://website/podcast/` and `http://website/podcast/page:podcast.xml`. It's a feed for the entire website, only visible pages are included. To make a blog podcast feed open file `system/config/config.ini` and change `PodcastFilter: blog`. It is also possible to filter podcasts by tag. Use an URL like `http://website/podcast/tag:series1/page:podcast.xml` You can add a link to the podcast somewhere on your website. 
 
 ## How to configure a podcast?
 
@@ -57,7 +57,7 @@ This is the article for your podcast episode.[--more--] It is recommended to use
 ## Todo
 
 * Dedicated podcast page template with audio player
-* Extend `PodcastFilter` with a location feature, e.G. `PodcastFilterLocation: /my-podcast/`
+* Correct subscribe metadata for tag-specific feeds. 
 
 ## Developer
 

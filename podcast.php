@@ -40,6 +40,7 @@ class YellowPodcast
 			{
 				$pages = $this->yellow->pages->index(false, false);
 				if(!empty($podcastFilter)) $pages->filter("template", $podcastFilter);
+				if($_REQUEST["tag"]) $pages->filter("tag", $_REQUEST["tag"]);
 				$pages->sort($chronologicalOrder ? "modified" : "published", false);
 				$pages->limit($this->yellow->config->get("podcastPaginationLimit"));
 				$this->yellow->page->setLastModified($pages->getModified());
@@ -103,6 +104,7 @@ class YellowPodcast
 			} else {
 				$pages = $this->yellow->pages->index(false, false);
 				if(!empty($podcastFilter)) $pages->filter("template", $podcastFilter);
+				if($_REQUEST["tag"]) $pages->filter("tag", $_REQUEST["tag"]);
 				$pages->sort($chronologicalOrder ? "modified" : "published");
 				$pages->pagination($this->yellow->config->get("podcastPaginationLimit"));
 				if(!$pages->getPaginationNumber()) $this->yellow->page->error(404);
