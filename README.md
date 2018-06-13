@@ -55,11 +55,6 @@ Duration: 00:10:00
 This is the article for your podcast episode.[--more--] It is recommended to use a page break to provide your listeners with a summary for their podcatchers. Furthermore you should link the media file [somewhere in this text](http://cdn.yourdomain.tld/podcast/files/episode1.mp3) for direct download. 
 ```
 
-## Todo
-
-* Dedicated podcast page template with audio player
-* Correct subscribe metadata for tag-specific feeds. 
-
 ## Developer
 
 Datenstrom with modifications by Steffen Schultz

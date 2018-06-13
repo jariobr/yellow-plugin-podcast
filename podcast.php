@@ -132,7 +132,9 @@ class YellowPodcast
 		if($name=="header")
 		{
 			$pagination = $this->yellow->config->get("contentPagination");			
+			$tag = $_REQUEST["tag"];
 			$locationPodcast = $this->yellow->config->get("serverBase").$this->yellow->config->get("podcastLocation");
+			if($tag) $locationPodcast .= $this->yellow->toolbox->normaliseArgs("tag:$tag", true);
 			$locationPodcast .= $this->yellow->toolbox->normaliseArgs("$pagination:".$this->yellow->config->get("podcastFileXml"), false);
 			$output = "<link rel=\"alternate\" type=\"application/rss+xml\" href=\"$locationPodcast\" />\n";
 		}
