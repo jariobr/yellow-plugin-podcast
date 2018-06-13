@@ -40,7 +40,8 @@ class YellowPodcast
 			{
 				$pages = $this->yellow->pages->index(false, false);
 				if(!empty($podcastFilter)) $pages->filter("template", $podcastFilter);
-				if($_REQUEST["tag"]) $pages->filter("tag", $_REQUEST["tag"]);
+				$tag = $_REQUEST["tag"];
+				if($tag) $pages->filter("tag", $tag);
 				$pages->sort($chronologicalOrder ? "modified" : "published", false);
 				$pages->limit($this->yellow->config->get("podcastPaginationLimit"));
 				$this->yellow->page->setLastModified($pages->getModified());
@@ -48,7 +49,11 @@ class YellowPodcast
 				$output = "<?xml version=\"1.0\" encoding=\"utf-8\"\077>\r\n";
 				$output .= "<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:atom=\"http://www.w3.org/2005/Atom\" xmlns:itunes=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">\r\n";
 				$output .= "<channel>\r\n";
-				$output .= "<title>".$this->yellow->page->getHtml("sitename")." - ".$this->yellow->text->getHtml("PodcastFeed")."</title>\r\n";
+				if($tag) {
+					$output .= "<title>".ucfirst($tag)." - ".$this->yellow->text->getHtml("PodcastFeed")."</title>\r\n";
+				} else {
+					$output .= "<title>".$this->yellow->page->getHtml("sitename")." - ".$this->yellow->text->getHtml("PodcastFeed")."</title>\r\n";
+				}
 				$output .= "<link>".$this->yellow->page->scheme."://".$this->yellow->page->address.$this->yellow->page->base."/"."</link>\r\n";
 				$output .= "<description>".$this->yellow->page->getHtml("tagline")."</description>\r\n";
 				$output .= "<atom:link rel=\"self\" type=\"application/rss+xml\" title=\"".$this->yellow->page->getHtml("sitename")." - ".$this->yellow->text->getHtml("PodcastFeed")."\" href=\"".$this->yellow->page->scheme."://".$this->yellow->page->address.$this->yellow->page->base."/"."\" />\r\n";
