@@ -15,7 +15,7 @@ class YellowPodcast
 		$this->yellow = $yellow;
 		$this->yellow->config->setDefault("podcastLocation", "/podcast/");
 		$this->yellow->config->setDefault("podcastFileXml", "podcast.xml");
-		$this->yellow->config->setDefault("podcastFilter", "");
+		$this->yellow->config->setDefault("podcastFilter", "blog");
 		$this->yellow->config->setDefault("podcastPaginationLimit", "30");
 		$this->yellow->config->setDefault("podcastMimeType", "audio/mpeg");
 		$this->yellow->config->setDefault("podcastImageUrl", "");
