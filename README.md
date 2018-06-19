@@ -13,7 +13,7 @@ To uninstall delete the [plugin files](update.ini).
 
 ## How to use a podcast?
 
-The podcast feed is available on your website as `http://website/podcast/` and `http://website/podcast/page:podcast.xml`. It's a feed for the entire website, only visible pages are included. To make a blog podcast feed open file `system/config/config.ini` and change `PodcastFilter: blog`. It is also possible to filter podcasts by tag. Use an URL like `http://website/podcast/tag:series1/page:podcast.xml` You can add a link to the podcast somewhere on your website. 
+The podcast feed is available on your website as `http://website/podcast/` and `http://website/podcast/page:podcast.xml`. It's a feed for the entire website, only visible pages are included. To make a blog podcast feed open file `system/config/config.ini` and change `PodcastFilter: blog`. It is also possible to filter podcasts by tag or author, use an URL like `http://website/podcast/tag:series1/page:podcast.xml` You can add a link to the podcast somewhere on your website. 
 
 ## How to configure a podcast?
 
@@ -21,7 +21,7 @@ The following settings can be configured in file `system/config/config.ini`:
 
 `PodcastLocation` = podcast location  
 `PodcastFileXml` = feed file name for RSS podcast feed  
-`PodcastFilter` = podcast template filter  
+`PodcastFilter` = podcast template filter, default is blog  
 `PodcastPaginationLimit` = number of entries to show per page  
 `PodcastMimeType` = mimetype of included files, default is audio/mpeg (mp3)  
 `PodcastImageUrl` = URL to your podcast image.  

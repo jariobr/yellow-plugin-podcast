@@ -1,4 +1,0 @@
-Language: de
-
-PodcastFeed: Podcast-Feed
-PodcastArchive: Episodenliste

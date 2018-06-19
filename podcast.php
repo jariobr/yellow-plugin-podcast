@@ -6,7 +6,7 @@
 
 class YellowPodcast
 {
-	const VERSION = "0.7.1";
+	const VERSION = "0.7.4";
 	var $yellow;			//access to API
 	
 	// Handle initialisation
@@ -33,30 +33,35 @@ class YellowPodcast
 	{
 		if($this->yellow->page->get("template")=="podcast")
 		{
-			$podcastFilter = $this->yellow->config->get("podcastFilter");
-			$chronologicalOrder = ($this->yellow->config->get("podcastFilter")!="blog");
-			$pagination = $this->yellow->config->get("contentPagination");
-			if($_REQUEST[$pagination]==$this->yellow->config->get("podcastFileXml"))
+			$pages = $this->yellow->pages->index(false, false);
+			$pagesFilter = array();
+			if($_REQUEST["tag"])
 			{
-				$pages = $this->yellow->pages->index(false, false);
-				if(!empty($podcastFilter)) $pages->filter("template", $podcastFilter);
-				$tag = $_REQUEST["tag"];
-				if($tag) $pages->filter("tag", $tag);
+				$pages->filter("tag", $_REQUEST["tag"]);
+				array_push($pagesFilter, $pages->getFilter());
+			}
+			if($_REQUEST["author"])
+			{
+				$pages->filter("author", $_REQUEST["author"]);
+				array_push($pagesFilter, $pages->getFilter());
+			}
+			$podcastFilter = $this->yellow->config->get("podcastFilter");
+			if(!empty($podcastFilter)) $pages->filter("template", $podcastFilter);
+			$chronologicalOrder = ($this->yellow->config->get("podcastFilter")!="blog");
+			if($this->isRequestXml())
+			{
 				$pages->sort($chronologicalOrder ? "modified" : "published", false);
 				$pages->limit($this->yellow->config->get("podcastPaginationLimit"));
+				$title = !empty($pagesFilter) ? implode(' ', $pagesFilter)." - ".$this->yellow->page->get("sitename") : $this->yellow->page->get("sitename");
 				$this->yellow->page->setLastModified($pages->getModified());
 				$this->yellow->page->setHeader("Content-Type", "application/rss+xml; charset=utf-8");
 				$output = "<?xml version=\"1.0\" encoding=\"utf-8\"\077>\r\n";
 				$output .= "<rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:atom=\"http://www.w3.org/2005/Atom\" xmlns:itunes=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">\r\n";
 				$output .= "<channel>\r\n";
-				if($tag) {
-					$output .= "<title>".ucfirst($tag)." - ".$this->yellow->text->getHtml("PodcastFeed")."</title>\r\n";
-				} else {
-					$output .= "<title>".$this->yellow->page->getHtml("sitename")." - ".$this->yellow->text->getHtml("PodcastFeed")."</title>\r\n";
-				}
+				$output .= "<title>".htmlspecialchars($title)."</title>\r\n";
 				$output .= "<link>".$this->yellow->page->scheme."://".$this->yellow->page->address.$this->yellow->page->base."/"."</link>\r\n";
 				$output .= "<description>".$this->yellow->page->getHtml("tagline")."</description>\r\n";
-				$output .= "<atom:link rel=\"self\" type=\"application/rss+xml\" title=\"".$this->yellow->page->getHtml("sitename")." - ".$this->yellow->text->getHtml("PodcastFeed")."\" href=\"".$this->yellow->page->scheme."://".$this->yellow->page->address.$this->yellow->page->base."/"."\" />\r\n";
+				$output .= "<atom:link rel=\"self\" type=\"application/rss+xml\" title=\"".htmlspecialchars($title)."\" href=\"".$this->yellow->page->scheme."://".$this->yellow->page->address.$this->yellow->page->base."/"."\" />\r\n";
 				if($this->yellow->config->get("podcastImageUrl")) {
 					$output .= "<image>\r\n";
 					$output .= "<url>".$this->yellow->config->get("podcastImageUrl")."</url>\r\n";
@@ -112,12 +117,15 @@ class YellowPodcast
 				$output .= "</rss>\r\n";
 				$this->yellow->page->setOutput($output);
 			} else {
-				$pages = $this->yellow->pages->index(false, false);
-				if(!empty($podcastFilter)) $pages->filter("template", $podcastFilter);
-				if($_REQUEST["tag"]) $pages->filter("tag", $_REQUEST["tag"]);
 				$pages->sort($chronologicalOrder ? "modified" : "published");
 				$pages->pagination($this->yellow->config->get("podcastPaginationLimit"));
 				if(!$pages->getPaginationNumber()) $this->yellow->page->error(404);
+				if(!empty($pagesFilter))
+				{
+					$title = implode(' ', $pagesFilter);
+					$this->yellow->page->set("titleHeader", $title." - ".$this->yellow->page->get("sitename"));
+					$this->yellow->page->set("titleContent", $this->yellow->page->get("title").": ".$title);
+				}
 				$this->yellow->page->set("podcastChronologicalOrder", $chronologicalOrder);
 				$this->yellow->page->setPages($pages);
 				$this->yellow->page->setLastModified($pages->getModified());
@@ -139,6 +147,13 @@ class YellowPodcast
 			$output = "<link rel=\"alternate\" type=\"application/rss+xml\" href=\"$locationPodcast\" />\n";
 		}
 		return $output;
+	}
+	
+	// Check if XML requested
+	function isRequestXml()
+	{
+		$pagination = $this->yellow->config->get("contentPagination");
+		return $_REQUEST[$pagination]==$this->yellow->config->get("podcastFileXml");
 	}
 }
 
