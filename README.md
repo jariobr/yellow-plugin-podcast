@@ -1,5 +1,5 @@
-Podcast plugin 0.7.1
-====================
+Podcast plugin
+==============
 Simple podcast feed for media files. Based on the [original Yellow feed plugin](https://github.com/datenstrom/yellow-plugins/tree/master/feed). 
 
 ## How do I install this?
