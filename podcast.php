@@ -1,7 +1,7 @@
 <?php
-// Podcast Plugin
+// Podcast Plugin, https://github.com/schulle4u/yellow-plugin-podcast
 // Based on the yellow Feed plugin, https://github.com/datenstrom/yellow-plugins/tree/master/feed
-// Copyright (c) 2013-2017 Datenstrom, https://datenstrom.se
+// Copyright (c) 2013-2018 Datenstrom, https://datenstrom.se
 // This file may be used and distributed under the terms of the public license.
 
 class YellowPodcast

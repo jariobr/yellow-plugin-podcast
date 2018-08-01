@@ -2,20 +2,20 @@ Podcast plugin 0.7.4
 ==============
 Simple podcast feed for media files. Based on the [original Yellow feed plugin](https://github.com/datenstrom/yellow-plugins/tree/master/feed). 
 
-## How do I install this?
+## How to install plugin
 
 1. [Download and install Datenstrom Yellow](https://github.com/datenstrom/yellow/).
 2. [Download plugin](https://github.com/schulle4u/yellow-plugin-podcast/archive/master.zip). If you are using Safari, right click and select 'Download file as'.
-3. Copy `podcast.zip` into your `system/plugins` folder.
+3. Copy `master.zip` into your `system/plugins` folder.
 4. Optional: download and install the [Audio plugin](https://github.com/schulle4u/yellow-plugin-audio/). 
 
 To uninstall delete the [plugin files](update.ini).
 
-## How to use a podcast?
+## How to use the podcast
 
 The podcast feed is available on your website as `http://website/podcast/` and `http://website/podcast/page:podcast.xml`. It's a feed for the entire website, only visible pages are included. To make a blog podcast feed open file `system/config/config.ini` and change `PodcastFilter: blog`. It is also possible to filter podcasts by tag or author, use an URL like `http://website/podcast/tag:series1/page:podcast.xml` You can add a link to the podcast somewhere on your website. 
 
-## How to configure a podcast?
+## How to configure the podcast
 
 The following settings can be configured in file `system/config/config.ini`:
 
@@ -58,7 +58,3 @@ This is the article for your podcast episode.[--more--] It is recommended to use
 ## Developer
 
 Datenstrom with modifications by Steffen Schultz
-
-## See also
-
-* [Audio plugin](https://github.com/schulle4u/yellow-plugin-audio/), useful to directly play the podcast on your website. 
