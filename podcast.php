@@ -6,7 +6,7 @@
 
 class YellowPodcast
 {
-	const VERSION = "0.7.4";
+	const VERSION = "0.7.5";
 	var $yellow;			//access to API
 	
 	// Handle initialisation
@@ -100,12 +100,8 @@ class YellowPodcast
 					$output .= "<dc:creator>".$page->getHtml("author")."</dc:creator>\r\n";
 					$output .= "<description>".$page->getHtml("description")."</description>\r\n";
 					$output .= "<content:encoded><![CDATA[".$content."]]></content:encoded>\r\n";
-					if($this->yellow->config->isExisting("audioBase")) {
-						$base = $this->yellow->config->get("audioBase");
-						if($page->isExisting("mediafile")) $output .= "<enclosure url=\"".$base.$page->getHtml("mediafile")."\" length=\"0\" type=\"".$this->yellow->config->get("podcastMimeType")."\" />\r\n";
-					} else {
-						if($page->isExisting("mediafile")) $output .= "<enclosure url=\"".$page->getHtml("mediafile")."\" length=\"0\" type=\"".$this->yellow->config->get("podcastMimeType")."\" />\r\n";
-					}
+					
+					if($page->isExisting("mediafile")) $output .= "<enclosure url=\"".$this->parseUrl($page->getHtml("mediafile"))."\" length=\"0\" type=\"".$this->yellow->config->get("podcastMimeType")."\" />\r\n";
 					if($page->isExisting("duration")) $output .= "<itunes:duration>".$page->getHtml("duration")."</itunes:duration>\r\n";
 					$output .= "<itunes:subtitle>".$page->getHtml("description")."</itunes:subtitle>\r\n";
 					$output .= "<itunes:summary><![CDATA[".$content."]]></itunes:summary>\r\n";
@@ -154,6 +150,20 @@ class YellowPodcast
 	{
 		$pagination = $this->yellow->config->get("contentPagination");
 		return $_REQUEST[$pagination]==$this->yellow->config->get("podcastFileXml");
+	}
+	
+	// Parse URL
+	function parseUrl($url) 
+	{
+		if($this->yellow->config->isExisting("audioUrlPrefix")) $url = $this->yellow->config->get("audioUrlPrefix").$url;
+		if(!preg_match("/^\w+:/", $url))
+		{
+			$url = $this->yellow->config->get("serverBase").$url;
+		} else {
+			$url = $this->yellow->lookup->normaliseUrl("", "", "", $url);
+		}
+		
+		return $url;
 	}
 }
 
