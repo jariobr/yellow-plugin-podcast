@@ -152,5 +152,3 @@ class YellowPodcast {
         return $url;
     }
 }
-
-$yellow->plugins->register("podcast", "YellowPodcast", YellowPodcast::VERSION);
