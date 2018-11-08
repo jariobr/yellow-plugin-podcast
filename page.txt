@@ -1,6 +1,7 @@
 ---
 Title: Podcast
-Description: Podcast
+Description: description of custom podcasts (it is very important for directories like tunein, spotfy, iTunes, google music ...)
 Template: podcast
+Tag: consider tag here
 ---
-This page is automatically generated.
+This page is automatically generated. (Change this text for a custom general about your podcasts)
